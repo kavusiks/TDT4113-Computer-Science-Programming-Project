@@ -1,6 +1,6 @@
 """ Template for Project 1: Morse code """
 
-from GPIOSimulator_v1 import *
+from Morse_Decoder.GPIOSimulator_v1 import *
 GPIO = GPIOSimulator()
 
 MORSE_CODE = {'.-': 'a', '-...': 'b', '-.-.': 'c', '-..': 'd', '.': 'e', '..-.': 'f', '--.': 'g',
@@ -15,12 +15,18 @@ class MorseDecoder():
 
     def __init__(self):
         """ initialize your class """
+        self.current_symbol = ""
+        self.current_word = ""
 
     def reset(self):
         """ reset the variable for a new run """
+        self.current_symbol = ""
+        self.current_word = ""
+
 
     def read_one_signal(self):
         """ read a signal from Raspberry Pi """
+        GPIO.input(self, PIN_BTN)
 
     def decoding_loop(self):
         """ the main decoding loop """
