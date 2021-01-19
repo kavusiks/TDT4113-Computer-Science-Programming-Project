@@ -103,4 +103,3 @@ class GPIOSimulator:
                     verb = 'is still'
                 print("%s %s %s." % (led_dict[pin], verb, state_str_dict[state]))
                 self.pin_states[pin] = state
-        return "%s %s %s." % (led_dict[pin], verb, state_str_dict[state])
