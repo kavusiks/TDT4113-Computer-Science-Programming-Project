@@ -12,7 +12,7 @@ MORSE_CODE = {'.-': 'a', '-...': 'b', '-.-.': 'c', '-..': 'd', '.': 'e', '..-.':
               '---..': '8', '----.': '9', '-----': '0'}
 
 
-class MorseDecoder():
+class MorseDecoder:
     """ Morse code class """
 
     def __init__(self):
@@ -27,7 +27,8 @@ class MorseDecoder():
         self.handle_reset()
         self.current_word = ""
 
-    def read_one_signal(self):
+    @staticmethod
+    def read_one_signal():
         """ read a signal from Raspberry Pi """
         GPIO.setup(PIN_BTN, GPIO.IN, GPIO.LOW)
         return GPIO.input(PIN_BTN)
@@ -48,7 +49,8 @@ class MorseDecoder():
         if previous_state1 == previous_state2 == previous_state3 == signal:
             return True
 
-    def find_handle_on_signal(self, signal):
+    @staticmethod
+    def find_handle_on_signal(signal):
         """ returns the opposite signal of the given signal """
         if signal == 0:
             return 1
@@ -68,7 +70,7 @@ class MorseDecoder():
                     self.toggle_led("RED")
             """ If its a time gap between two word"""
             if signal == 0:
-                if (time.time() - timer_start) > (10*self.T):
+                if (time.time() - timer_start) > (7*self.T):
                     counting = False
             if self.confirm_action(self.find_handle_on_signal(signal)):
                 counting = False
@@ -85,8 +87,9 @@ class MorseDecoder():
         """
         return self.process_signal(signal, elapsed)
 
-    def set_led(self, color, state):
-        " used to set the output state of the given LEDs"
+    @staticmethod
+    def set_led(color, state):
+        """ used to set the output state of the given LEDs"""
         if color == "BLUE":
             GPIO.output(PIN_BLUE_LED, state)
         if color == "RED":
@@ -95,7 +98,7 @@ class MorseDecoder():
             GPIO.output(PIN_RED_LED_2, state)
 
     def toggle_led(self, color):
-        "used to blink the gived LED"
+        """used to blink the given LED"""
         if color == "BLUE":
             GPIO.output(PIN_BLUE_LED, GPIO.HIGH)
             time.sleep(self.T/2)
@@ -111,12 +114,11 @@ class MorseDecoder():
             GPIO.output(PIN_RED_LED_2, GPIO.LOW)
             time.sleep(self.T/2)
 
-
     def process_signal(self, signal, elapsed):
         """ handle the signals using corresponding functions """
         """ uses signal and elapsed time determine '.' or '_' or 'pause'"""
         if signal == GPIO.PUD_DOWN:
-            """ since 1*T i already used in the printin of LED state"""
+            """ since 1*T i already used in the printing of LED state"""
             if elapsed <= (1.5 * self.T):
                 return self.update_current_symbol('.')
             if elapsed > (1.5 * self.T):
@@ -143,7 +145,7 @@ class MorseDecoder():
         if self.current_symbol != "":
             if self.current_symbol in MORSE_CODE:
                 current_char = MORSE_CODE.get(self.current_symbol)
-                print("Character registerd: ", current_char)
+                print("Character registered: ", current_char)
                 self.current_word += current_char
                 self.handle_reset()
             else:
@@ -170,12 +172,12 @@ class MorseDecoder():
 
 def main():
     """ the main function """
-    modecode = MorseDecoder()
+    md = MorseDecoder()
     print("Decoding starts in 3 sec")
     for i in range(4):
         print(3-i)
         time.sleep(1)
-    modecode.decoding_loop()
+    md.decoding_loop()
 
 
 if __name__ == "__main__":
