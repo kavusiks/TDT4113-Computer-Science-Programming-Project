@@ -129,7 +129,7 @@ class MorseDecoder:
             if (elapsed > (1.5*self.T)) and (elapsed <= (4.5 * self.T)):
                 print("Word registered")
                 return self.handle_symbol_end()
-            if elapsed > (7 * self.T):
+            if elapsed > (4.5 * self.T):
                 return self.handle_word_end()
 
     def update_current_symbol(self, signal):
