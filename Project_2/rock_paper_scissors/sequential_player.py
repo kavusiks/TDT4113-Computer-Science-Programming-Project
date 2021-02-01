@@ -1,19 +1,21 @@
 
-from ProgramFiles.AbstractPlayer import AbstractPlayer
+from rock_paper_scissors.abstract_player import AbstractPlayer
+
 
 class Sequential(AbstractPlayer):
     last_played = None
 
     def __init__(self, name):
-        AbstractPlayer.__init__(self)
-        AbstractPlayer.enter_name(self, name)
+        # AbstractPlayer.__init__(self)
+        #AbstractPlayer.enter_name(self, name)
+        self.enter_name(name)
 
     def select_action(self):
         """Selects which action to perform and returns it"""
         to_play_next = self.find_next_play()
         return to_play_next
 
-    def receive_result(self, chosen_by_me, chosen_by_opponent):
+    def receive_result(self, chosen_by_opponent):
         """The player receive the result from last single game"""
         pass
 
@@ -26,6 +28,7 @@ class Sequential(AbstractPlayer):
             self.last_played = 0
         return self.last_played
 
+
 def main():
     print("test")
     test = Sequential("ole")
@@ -34,6 +37,7 @@ def main():
     print(test.select_action())
     print(test.select_action())
     print(test.select_action())
+
 
 if __name__ == "__main__":
     main()

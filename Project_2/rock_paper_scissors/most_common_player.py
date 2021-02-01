@@ -1,13 +1,14 @@
 import random
-from ProgramFiles.AbstractPlayer import AbstractPlayer
-from ProgramFiles.Action import Action
+from rock_paper_scissors.abstract_player import AbstractPlayer
+from rock_paper_scissors.action import Action
 
 
 class MostCommon(AbstractPlayer):
 
     def __init__(self, name):
-        AbstractPlayer.__init__(self)
-        AbstractPlayer.enter_name(self, name)
+        # AbstractPlayer.__init__(self)
+        #AbstractPlayer.enter_name(self, name)
+        self.enter_name(name)
         self.opponents_history = []
         self.opponent_most_played = None
 
@@ -15,12 +16,12 @@ class MostCommon(AbstractPlayer):
         """Selects which action to perform and returns it"""
         self.update_opponent_most_played()
         if self.opponent_most_played is None:
-            return random.randint(0,2)
+            return random.randint(0, 2)
         else:
             action = Action(self.opponent_most_played)
             return action.who_beats_me()
 
-    def receive_result(self, chosen_by_me, chosen_by_opponent):
+    def receive_result(self, chosen_by_opponent):
         """The player receive the result from last single game"""
         self.opponents_history.append(chosen_by_opponent)
 
@@ -39,8 +40,9 @@ class MostCommon(AbstractPlayer):
             if paper_count > rock_count and paper_count > scissors_count:
                 self.opponent_most_played = 2
 
+
 def main():
- print("test")
+    print("test")
 
 
 if __name__ == "__main__":

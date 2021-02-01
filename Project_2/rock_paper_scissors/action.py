@@ -1,3 +1,5 @@
+'''Module: rock_paper_scissors'''
+
 
 class Action:
     """Representation of a selection/move. Usefull to make a seperate class
@@ -24,5 +26,6 @@ class Action:
         return self.action_names[self.value]
 
     def who_beats_me(self):
+        """:returns the value of the number that would beat this instance"""
         # A move wins the next of next in modulo 3
         return (self.value + 2) % 3
