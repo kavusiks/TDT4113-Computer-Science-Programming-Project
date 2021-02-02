@@ -1,9 +1,12 @@
+"""Module: rock_paper_scissors"""
 import random
+
 from rock_paper_scissors.abstract_player import AbstractPlayer
 from rock_paper_scissors.action import Action
 
 
 class MostCommon(AbstractPlayer):
+    """Player who allways chooses by remembering what the opponent most commonly chooses"""
 
     def __init__(self, name):
         # AbstractPlayer.__init__(self)
@@ -17,15 +20,15 @@ class MostCommon(AbstractPlayer):
         self.update_opponent_most_played()
         if self.opponent_most_played is None:
             return random.randint(0, 2)
-        else:
-            action = Action(self.opponent_most_played)
-            return action.who_beats_me()
+        action = Action(self.opponent_most_played)
+        return action.who_beats_me()
 
     def receive_result(self, chosen_by_opponent):
         """The player receive the result from last single game"""
         self.opponents_history.append(chosen_by_opponent)
 
     def update_opponent_most_played(self):
+        """Updates oppononent_most_played based on their most common plays"""
         if len(self.opponents_history) > 0:
             rock_count = self.opponents_history.count(0)
             scissors_count = self.opponents_history.count(1)
@@ -42,6 +45,7 @@ class MostCommon(AbstractPlayer):
 
 
 def main():
+    """Main method used for testing"""
     print("test")
 
 

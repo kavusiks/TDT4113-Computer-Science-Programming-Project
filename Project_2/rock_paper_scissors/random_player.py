@@ -1,8 +1,11 @@
+"""Module: rock_paper_scissors"""
 import random
+
 from rock_paper_scissors.abstract_player import AbstractPlayer
 
 
 class Random(AbstractPlayer):
+    """Randommly chooses what to play next"""
 
     def __init__(self, name):
         # AbstractPlayer.__init__(self)
@@ -15,10 +18,10 @@ class Random(AbstractPlayer):
 
     def receive_result(self, chosen_by_opponent):
         """The player receive the result from last single game"""
-        pass
 
 
 def main():
+    """User for testing"""
     print("test")
     test = Random("ole")
     print(test.get_name())

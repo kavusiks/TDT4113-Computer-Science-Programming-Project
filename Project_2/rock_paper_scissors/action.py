@@ -1,4 +1,4 @@
-'''Module: rock_paper_scissors'''
+"""Module: rock_paper_scissors"""
 
 
 class Action:

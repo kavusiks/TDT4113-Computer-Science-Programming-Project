@@ -1,14 +1,13 @@
-
+"""Module: rock_paper_scissors"""
 from rock_paper_scissors.abstract_player import AbstractPlayer
 
 
 class Sequential(AbstractPlayer):
-    last_played = None
+    """Plays rock, scissors, paper sequential"""
 
     def __init__(self, name):
-        # AbstractPlayer.__init__(self)
-        #AbstractPlayer.enter_name(self, name)
         self.enter_name(name)
+        self.last_played = None
 
     def select_action(self):
         """Selects which action to perform and returns it"""
@@ -17,9 +16,9 @@ class Sequential(AbstractPlayer):
 
     def receive_result(self, chosen_by_opponent):
         """The player receive the result from last single game"""
-        pass
 
     def find_next_play(self):
+        """Finds next play by checking what it played last round"""
         if self.last_played is None:
             self.last_played = 0
         elif self.last_played == 0 or self.last_played == 1:
@@ -30,6 +29,7 @@ class Sequential(AbstractPlayer):
 
 
 def main():
+    """Used for testing"""
     print("test")
     test = Sequential("ole")
     print(test.get_name())

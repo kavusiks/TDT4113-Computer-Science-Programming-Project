@@ -1,11 +1,13 @@
-from rock_paper_scissors.random_player import Random
-from rock_paper_scissors.most_common_player import MostCommon
-from rock_paper_scissors.sequential_player import Sequential
-from rock_paper_scissors.historian_player import Historian
+"""Module: rock_paper_scissors"""
 from rock_paper_scissors.action import Action
+from rock_paper_scissors.historian_player import Historian
+from rock_paper_scissors.sequential_player import Sequential
+from rock_paper_scissors.most_common_player import MostCommon
+from rock_paper_scissors.random_player import Random
 
 
 class SingleGame:
+    """Used to play a one vs one game between AbstractPlayer classes"""
 
     def __init__(self, player1, player2):
         self.player1 = player1
@@ -16,6 +18,9 @@ class SingleGame:
         self.player2_points = 0
 
     def perform_game(self):
+        """Used to perform each single game. Gets what the players want to play,
+        decide who wins and allocates point based on the results. Prints the result
+        to the console."""
         self.reset_score()
         self.player1_choice = self.player1.select_action()
         self.player2_choice = self.player2.select_action()
@@ -45,6 +50,7 @@ class SingleGame:
         self.show_result()
 
     def show_result(self):
+        """Used to print the result based on the points given in the last round"""
         action1 = Action(self.player1_choice)
         action2 = Action(self.player2_choice)
         if self.player1_points == self.player2_points:
@@ -78,14 +84,16 @@ class SingleGame:
                 action1.__str__())
 
     def reset_score(self):
+        """ Used to reset scorepoints between each rounds"""
         # Only used for testing
         self.player1_points = 0
         self.player2_points = 0
 
 
 def main():
+    """Code used for testing"""
     print("test:")
-    """random = Random("ran1")
+    random = Random("ran1")
     seqiential = Sequential("seq1")
     mostcommon2 = MostCommon("mos2")
     mostcommon = MostCommon("mos1")
@@ -113,7 +121,7 @@ def main():
     sg3.show_result()
     print("fjerde runde")
     sg3.perform_game()
-    sg3.show_result()"""
+    sg3.show_result()
 
     print(" ")
     print("Historian vs MostCommon")
