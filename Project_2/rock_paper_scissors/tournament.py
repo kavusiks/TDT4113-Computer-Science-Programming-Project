@@ -162,10 +162,9 @@ def text_based_interface():
 
 def main():
     """Main method"""
+    while True:
+        text_based_interface()
 
-
-while True:
-    text_based_interface()
 
 if __name__ == "__main__":
     main()
