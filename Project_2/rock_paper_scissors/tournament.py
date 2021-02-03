@@ -1,9 +1,10 @@
 """Module: rock_paper_scissors"""
 import matplotlib.pyplot as plt
+
+from rock_paper_scissors.historian_player import Historian
 from rock_paper_scissors.most_common_player import MostCommon
 from rock_paper_scissors.random_player import Random
 from rock_paper_scissors.sequential_player import Sequential
-from rock_paper_scissors.historian_player import Historian
 from rock_paper_scissors.single_game import SingleGame
 
 
@@ -124,50 +125,45 @@ def start_play(game_type, player1, player2):
 
 def text_based_interface():
     """ Text based user interactions interface"""
-    new_game = False
-    while not new_game:
-        character1 = enter_character_name()
-        player1_name = input("Enter your " + character1 + "´s " + "name: ")
-        remember1 = set_remember_for_historian(character1)
-        character2 = enter_character_name()
-        player2_name = input("Enter your " + character2 + "´s " + "name: ")
-        remember2 = set_remember_for_historian(character2)
-        player1 = create_player_by_name(character1, player1_name, remember1)
-        player2 = create_player_by_name(character2, player2_name, remember2)
-        print(
-            "The Players are set:",
-            "player1",
-            character1,
-            player1_name,
-            "and",
-            "player2",
-            character2,
-            player2_name)
+    character1 = enter_character_name()
+    player1_name = input("Enter your " + character1 + "´s " + "name: ")
+    remember1 = set_remember_for_historian(character1)
+    character2 = enter_character_name()
+    player2_name = input("Enter your " + character2 + "´s " + "name: ")
+    remember2 = set_remember_for_historian(character2)
+    player1 = create_player_by_name(character1, player1_name, remember1)
+    player2 = create_player_by_name(character2, player2_name, remember2)
+    print(
+        "The Players are set:",
+        "player1",
+        character1,
+        player1_name,
+        "and",
+        "player2",
+        character2,
+        player2_name)
 
-        same_game = True
-        while same_game:
-            start_play(
-                input("type in 'single game' or 'tournament': "),
-                player1,
-                player2)
-            continue_same_game = input(
-                "New round with the same players? (y/n)")
-            if continue_same_game.lower() == "n":
-                new_players = input("Set up new players? (y/n)")
-                if new_players.lower() == "y":
-                    new_game = True
-                    same_game = False
-                else:
-                    print("Bye!")
-                    exit()
+    same_game = True
+    while same_game:
+        start_play(
+            input("type in 'single game' or 'tournament': "),
+            player1,
+            player2)
+        continue_same_game = input(
+            "New round with the same players? (y/n)")
+        if continue_same_game.lower() == "n":
+            new_players = input("Set up new players? (y/n)")
+            if new_players.lower() == "y":
+                same_game = False
+            else:
+                print("Bye!")
+                exit()
 
 
 def main():
     """Main method"""
-
-
-while True:
-    text_based_interface()
+    while True:
+        text_based_interface()
 
 
 if __name__ == "__main__":
