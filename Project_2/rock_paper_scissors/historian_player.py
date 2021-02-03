@@ -27,7 +27,7 @@ class Historian(AbstractPlayer):
             return random.randint(0, 2)
         else:
             action = Action(self.find_most_frequent())
-            print(action)
+            #print(action)
             return action.who_beats_me()
 
     def receive_result(self, chosen_by_opponent):
