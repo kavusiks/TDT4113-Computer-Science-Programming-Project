@@ -8,8 +8,6 @@ class Random(AbstractPlayer):
     """Randommly chooses what to play next"""
 
     def __init__(self, name):
-        # AbstractPlayer.__init__(self)
-        #AbstractPlayer.enter_name(self, name)
         self.enter_name(name)
 
     def select_action(self):
