@@ -58,13 +58,7 @@ class Hacker(AbstractPerson):
     @staticmethod
     def generate_dictionary():
         """Function that returns a list of many english words in lower case."""
-        file = open("english_words.txt", "r")
-        p_keys = []
-        for line in file:
-            s_line = line.strip()
-            l_list = s_line.split()
-            p_keys. append(l_list[0])
-        return p_keys
+        return Unbreakable.possible_key()
 
 
 def main():
