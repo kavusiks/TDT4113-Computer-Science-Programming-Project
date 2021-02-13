@@ -16,3 +16,6 @@ class Operator:
         if debug is True:
             print("Function: " + self.opr.__name__ + "({:f}) = {:f}".format(element1, element2, result))
             return result
+
+    def get_strength(self):
+        return self.strength
