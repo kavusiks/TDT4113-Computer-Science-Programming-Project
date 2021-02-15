@@ -1,14 +1,15 @@
+"""Module: Calculator """
 import numbers
 
+from queue import Queue
+from stack import Stack
 import numpy
-
-from Calculator.function import Function
-from Calculator.operator import Operator
-from Calculator.queue import Queue
-from Calculator.stack import Stack
+from function_methods import Function
+from operator_methods import Operator
 
 
 class Calculator:
+    """The main class for this application"""
 
     def __init__(self):
         # Define the functions supported byt linking them to Python
@@ -36,7 +37,8 @@ class Calculator:
         # The evaluate_output_queue method evaluates it
         self.output_queue = Queue()
 
-    def calculate(self):
+    def evaluate_output_queue(self):
+        """Method used to calculate a result from the output queue."""
         intermediate_stack = Stack()
 
         while not self.output_queue.is_empty():
@@ -58,15 +60,12 @@ class Calculator:
 
         return intermediate_stack.pop()
 
-    def shunting_yard(self, clean_input_list):
-        # shunting_queue = Queue()
+    @staticmethod
+    def shunting_yard(clean_input_list):
+        """Method used to convert from "normal" notion to RPN.
+        This method uses the logic from the shunting-yard algorithm. """
         operator_stack = Stack()
         output_queue = Queue()
-        # for char in input_string.strip():
-        #   shunting_queue.push(char)
-
-        # print(input_string.replace("(", "( ").replace(")", " ) ").split())
-        # input_string.replace("(", "( ").replace(")", " ) ").split():
 
         for elem in clean_input_list:
             if isinstance(elem, numbers.Number):
@@ -104,12 +103,16 @@ class Calculator:
         print(output_queue)
         return output_queue
 
-    def text_parser(self, input_text):
+    def parse_text(self, input_text):
+        """Method used to convert an input string to a list,
+         containing each individual element from the string."""
 
-        text_input_list = input_text.replace("(", "( ").replace(")", " ) ").split()
-        #print(text_input_list)
+        text_input_list = input_text.replace(
+            "(", "( ").replace(")", " ) ").split()
+        # print(text_input_list)
         for i in range(len(text_input_list)):
-            if len(text_input_list[i]) > 1 and not text_input_list[i].isnumeric():
+            if len(
+                    text_input_list[i]) > 1 and not text_input_list[i].isnumeric():
                 to_be_replaced = text_input_list[i].upper()
                 if to_be_replaced in self.operators.keys():
                     text_input_list[i] = self.operators.get(to_be_replaced)
@@ -117,9 +120,11 @@ class Calculator:
                     text_input_list[i] = self.functions.get(to_be_replaced)
             elif text_input_list[i].isnumeric():
                 text_input_list[i] = float(text_input_list[i])
-        #print(text_input_list)
+        # print(text_input_list)
         return text_input_list
 
-    def calculate_expression(self, txt: str):
-        self.output_queue = self.shunting_yard(self.text_parser(txt))
-        return self.calculate()
+    def calculate_by_expression(self, txt: str):
+        """Method used to calculate directly from input string.
+        This method puts every part together."""
+        self.output_queue = self.shunting_yard(self.parse_text(txt))
+        return self.evaluate_output_queue()
